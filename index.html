@@ -2,10 +2,63 @@
 <head>
     <meta charset="utf-8">
     <title>Project Awesome</title>
+    <!-- <script src="http://cdnjs.cloudflare.com/ajax/libs/bonsai/0.4/bonsai.min.js"></script> -->
+    <script src="/snap.svg.js"></script>
+    
 </head>
 
 <body>
-    
+<svg id="dude" width="60px" height="162px" viewBox="0 0 30 81" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    <path d="M17.3808132,13.882286 L18.6078132,13.882286 C23.2839307,13.882286 21.7108134,19.1065868 21.7108134,28.4562863 C21.7108134,37.8059858 21.7108132,39.938286 21.7108132,39.938286 L21.7108134,48.6266059 C21.7108134,51.1871527 15.3958132,50.453286 15.3958132,50.453286 C15.2968132,49.568286 14.2598132,49.576286 14.1638132,50.453286 C14.1638132,50.453286 7.7758132,51.2369574 7.7758132,48.6266059 L7.77581321,40.048286 C7.77581321,40.048286 7.77581321,37.7981726 7.77581321,28.456286 C7.7758132,19.1143993 5.92481321,13.882286 10.8718132,13.882286 L12.0978132,13.882286 L17.3808132,13.882286 Z" id="body" sketch:type="MSShapeGroup"></path>
+    <path d="M14.3044778,49.453286 L11.3256836,77.2592778 C10.8176836,81.7112778 4.42412891,80.6317114 4.93212891,76.1787114 L7.76806641,47.0522461 C8.46826172,43.9023433 15.3122899,46.4736328 14.3044778,49.453286 Z" id="leftLeg" sketch:type="MSShapeGroup"></path>
+    <path d="M24.5489468,49.453286 L21.5701526,77.2592778 C21.0621526,81.7112778 14.6685979,80.6317114 15.1765979,76.1787114 C15.1765979,76.1787114 18.2147302,47.1025391 18.0147302,47.1025391 C18.7149255,43.9526363 25.5567588,46.4736328 24.5489468,49.453286 Z" id="rightLeg" sketch:type="MSShapeGroup" transform="translate(19.898967, 62.878204) scale(-1, 1) translate(-19.898967, -62.878204) "></path>
+    <path d="M9.39697266,16.6362304 L4.92580194,41.252 C4.32980194,45.351 -0.895198061,44.376 0.133801939,39.976 L4.92580175,16.6362305 C4.92580175,13.8396329 10.1982422,12.1814296 9.39697266,16.6362304 Z" id="leftArm" sketch:type="MSShapeGroup"></path>
+    <path d="M29.307098,16.6362304 L24.8359273,41.252 C24.2399273,45.351 19.0149273,44.376 20.0439273,39.976 L24.8359271,16.6362305 C24.8359271,13.8396329 30.1083676,12.1814296 29.307098,16.6362304 Z" id="rightArm" sketch:type="MSShapeGroup" transform="translate(24.650052, 28.869417) scale(-1, 1) translate(-24.650052, -28.869417) "></path>
+    <path d="M14.701,0 C17.669,0 20.075,2.405 20.075,5.373 C20.075,8.341 17.669,10.747 14.701,10.747 C11.733,10.747 9.327,8.341 9.327,5.373 C9.327,2.405 11.733,0 14.701,0 L14.701,0 Z" id="head" sketch:type="MSShapeGroup"></path>
+</svg>
+
+
+    <script type="text/javascript">
+        var s = Snap();
+        var dude = Snap.select("#dude"),
+            head = dude.select("#head"),
+            body = dude.select("#body"),
+            leftArm = dude.select("#leftArm"),
+            rightArm = dude.select("#rightArm"),
+            leftLeg = dude.select("#leftLeg"),
+            rightLeg = dude.select("#rightLeg"),
+            timer;
+        var pivots = [
+                [44, 147],
+                [92, 126]
+            ];
+
+        // leftArm.animate({
+        //                 transform: "r120 8.5 16.8"
+        //             }, 200);
+        timer = setTimeout(function () {
+                    // console.log('fired');
+                    // leftArm.animate({
+                    //     transform: "r120 8.5 16.8"
+                    // }, 200);
+                    raiseRoof();
+                }, 500);
+
+        var raiseRoof = function() {
+            leftArm.animate({
+                transform: "r120 8.5 16.8"
+            }, 
+            200,
+            function(){
+                leftArm.animate({
+                    transform: "r0 8.5 16.8"
+                }, 
+                200,
+                raiseRoof
+                );
+            });
+        }
+    </script>
 </body>
 
 </html>
