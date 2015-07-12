@@ -84,7 +84,7 @@
                     if (pressure_trend == "-") {
                         if (!isRaining){    
                             isRaining = true;
-                            console.log("rain dance!");
+                            // console.log("rain dance!");
                             transition(rainDance);
                         }
                     } else {
@@ -92,7 +92,7 @@
                             isRaining = false;
                             transition(raiseRoof);
                         }
-                        console.log("keep dancing");
+                        // console.log("keep dancing");
                     }
                 }
             });
@@ -133,18 +133,18 @@
         var rightArmCenter = "20.9 16.8";
         var makeSomeNoise = function() {
             if (!doAnimation) {
-                console.log("stopping noise");
+                // console.log("stopping noise");
                 rightArm.animate({transform:""}, 100);
                 leftArm.animate({transform:""}, 100);
                 return;
             }
-            console.log("noise animation 1");
+            // console.log("noise animation 1");
             rightArm.animate({transform: "r-120 " + rightArmCenter}, 300);
             leftArm.animate(
                 {transform: "r120 " + leftArmCenter}, 
                 300,
                 function(){
-                    console.log("noise animation 2");
+                    // console.log("noise animation 2");
                     rightArm.animate({transform: "r-60 " + rightArmCenter}, 300);
                     leftArm.animate(
                         {transform: "r60 " + leftArmCenter}, 
@@ -234,7 +234,7 @@
         var setupRain = true;
         var rainDance = function() {
             if (!doAnimation) {
-                console.log("stopping rain");
+                // console.log("stopping rain");
                 rightArm.animate({transform:""}, 100);
                 leftArm.animate({transform:""}, 100);
                 rightLeg.animate({transform:""}, 100);
@@ -242,7 +242,7 @@
                 return;
             }
             if (setupRain) {
-                console.log("setup rain");
+                // console.log("setup rain");
                 rightArm.animate({transform:"r-160 " + rightArmCenter}, 100);
                 leftArm.animate(
                     {transform:"r160 " + leftArmCenter}, 
@@ -255,7 +255,7 @@
                 return;
             }
 
-            console.log("rain animation 1");
+            // console.log("rain animation 1");
             rightArm.animate({transform: "r-160 " + rightArmCenter + " t0 4"}, 300);
             leftLeg.animate({transform: ""}, 300);
             rightLeg.animate({transform: "t0 -6"}, 300);
@@ -263,7 +263,7 @@
                 {transform: "r160 " + leftArmCenter + "t0 0"}, 
                 300,
                 function(){
-                    console.log("rain animation 2");
+                    // console.log("rain animation 2");
                     rightArm.animate({transform: "r-160 " + rightArmCenter + " t0 0"}, 300);
                     leftLeg.animate({transform:"t0 -6"}, 300);
                     rightLeg.animate({transform:""}, 300);
@@ -286,7 +286,7 @@
 
         $("#rain").click(function(){
             isRaining = !isRaining;
-            console.log("isRaining", isRaining);
+            // console.log("isRaining", isRaining);
             if (isRaining) {
                 transition(rainDance);    
             } else {
