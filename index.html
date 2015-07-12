@@ -6,21 +6,30 @@
     <link rel="stylesheet" type="text/css" href="style.css">
     <link href='http://fonts.googleapis.com/css?family=Merriweather+Sans:400,800' rel='stylesheet' type='text/css'>
     
+    <script src="https://d26b395fwzu5fz.cloudfront.net/3.2.6/keen.min.js" type="text/javascript"></script>
     <script src="/snap.svg.js"></script>
     <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
     <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 </head>
 
 <body class="pink">
-    <span id="rain" class="topLeft"><i class="icon icon-umbrella icon-3x"></i></span>
-    <span id="share" class="topRight"><i class="icon icon-bullhorn icon-3x"></i></span>
-    <span id="magic" class="bottomLeft"><i class="icon icon-magic icon-3x"></i></span>
-    <span id="viral" class="bottomRight"><i class="icon icon-bar-chart icon-3x"></i></span>
+    <span id="rain" class="topLeft controls"><i class="icon icon-umbrella icon-3x"></i></span>
+    <span id="share" class="topRight controls"><i class="icon icon-bullhorn icon-3x"></i></span>
+    <!-- <span id="magic" class="bottomLeft controls"><i class="icon icon-magic icon-3x"></i></span> -->
+    <span id="viral" class="bottomRight controls"><i class="icon icon-bar-chart icon-3x"></i></span>
     <div id="info">
         <div id="site" class="pinkText">DanceCommander.rocks</div>
     </div>
+    <div id="chart">
+        <div id="count" class="pinkText">...</div>
     </div>
-    <div style="margin:0 auto; width:100%; height:100%">
+<!--     <div id="magic">
+        <form action="server.cgi" method="post" enctype="multipart/form-data">
+            <input type="file" name="video" accept="video/*" capture>
+            <input type="submit" value="Upload">
+        </form>
+    </div> -->
+    <div id="dancefloor" style="margin:0 auto; width:100%; height:100%">
 <svg id="dude" width="100%" height="100%" viewBox="0 0 130 131" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
     <g id="dudeGroup" transform="translate(50,25)">
     <path d="M17.3808132,13.882286 L18.6078132,13.882286 C23.2839307,13.882286 21.7108134,19.1065868 21.7108134,28.4562863 C21.7108134,37.8059858 21.7108132,39.938286 21.7108132,39.938286 L21.7108134,48.6266059 C21.7108134,51.1871527 15.3958132,50.453286 15.3958132,50.453286 C15.2968132,49.568286 14.2598132,49.576286 14.1638132,50.453286 C14.1638132,50.453286 7.7758132,51.2369574 7.7758132,48.6266059 L7.77581321,40.048286 C7.77581321,40.048286 7.77581321,37.7981726 7.77581321,28.456286 C7.7758132,19.1143993 5.92481321,13.882286 10.8718132,13.882286 L12.0978132,13.882286 L17.3808132,13.882286 Z" id="body" sketch:type="MSShapeGroup"></path>
@@ -32,6 +41,34 @@
     </g>
 </svg>
     </div>
+
+    <script type="text/javascript">
+    var tribe = "pink";
+
+    var client = new Keen({
+        projectId: "55a2b25d2fd4b141ff5d7c64", // String (required always)
+        writeKey: "60f5298117b6a44b256e291564d73caa478fcdeaf925cdc8faaf09aa5616377f836f7b2109c756582b40eaa12857604a6870eea0cdf40cba486889aa7f2d6f88602721b37950bd95f66906067ae47cf49f643d0db41c8ce7541c8bb38ef1312989021d1eda03065a39bf322eaf34e056",   // String (required for sending data)
+        readKey: "56589c708f2e3fcf64c6a1abe5768fca18c58c06fe31177dbee49c8522d6d98b725b413432e19963771b19be126975e57dd523adfba955716d7a48b5689f993d9d05ed36b219c0750232ae4958109b1b4ab2d80a5591a5b18e88f077aed35569c0b6d49a5785409ab2fccca0699ec876"      // String (required for querying data)
+
+        // protocol: "https",         // String (optional: https | http | auto)
+        // host: "api.keen.io/3.0",   // String (optional)
+        // requestType: "jsonp"       // String (optional: jsonp, xhr, beacon)
+    });
+    client.addEvent('dancing', {
+      page: window.location.href,
+      time: new Date().toISOString(),
+      referrer: document.referrer,
+      agent: window.navigator.userAgent
+    }, function(err,res){
+        // console.log(err, res);
+    });
+
+    var count = new Keen.Query("count", {
+        eventCollection: "dancing",
+        groupBy: "tribe",
+        timeframe: "this_15_minutes"
+    });
+    </script>
 
     <script type="text/javascript">
     $().ready(function(){
@@ -76,7 +113,7 @@
                 [44, 147],
                 [92, 126]
             ];
-
+/*
         // leftArm.animate({
         //                 transform: "r120 8.5 16.8"
         //             }, 200);
@@ -85,9 +122,9 @@
                     // leftArm.animate({
                     //     transform: "r120 8.5 16.8"
                     // }, 200);
-                    makeSomeNoise();
+                    transition(makeSomeNoise);
                 }, 500);
-
+*/
         // 9.479 13.882
         // "r120 8.5 16.8"
         // 19.91 13.882
@@ -96,16 +133,18 @@
         var rightArmCenter = "20.9 16.8";
         var makeSomeNoise = function() {
             if (!doAnimation) {
+                console.log("stopping noise");
                 rightArm.animate({transform:""}, 100);
                 leftArm.animate({transform:""}, 100);
-                doAnimation = true;
                 return;
             }
+            console.log("noise animation 1");
             rightArm.animate({transform: "r-120 " + rightArmCenter}, 300);
             leftArm.animate(
                 {transform: "r120 " + leftArmCenter}, 
                 300,
                 function(){
+                    console.log("noise animation 2");
                     rightArm.animate({transform: "r-60 " + rightArmCenter}, 300);
                     leftArm.animate(
                         {transform: "r60 " + leftArmCenter}, 
@@ -120,7 +159,6 @@
             if (!doAnimation) {
                 rightArm.animate({transform:""}, 100);
                 leftArm.animate({transform:""}, 100);
-                doAnimation = true;
                 return;
             }
             rightArm.animate({transform: "r-160 " + rightArmCenter}, 300);
@@ -143,7 +181,6 @@
             if (!doAnimation) {
                 rightArm.animate({transform:""}, 100);
                 leftArm.animate({transform:""}, 100);
-                doAnimation = true;
                 return;
             }
             if (setupRoof) {
@@ -177,7 +214,6 @@
             if (!doAnimation) {
                 rightArm.animate({transform:""}, 100);
                 leftArm.animate({transform:""}, 100);
-                doAnimation = true;
                 return;
             }
             rightArm.animate({transform: "t0 4"}, 300);
@@ -198,14 +234,15 @@
         var setupRain = true;
         var rainDance = function() {
             if (!doAnimation) {
+                console.log("stopping rain");
                 rightArm.animate({transform:""}, 100);
                 leftArm.animate({transform:""}, 100);
                 rightLeg.animate({transform:""}, 100);
                 leftLeg.animate({transform:""}, 100);
-                doAnimation = true;
                 return;
             }
             if (setupRain) {
+                console.log("setup rain");
                 rightArm.animate({transform:"r-160 " + rightArmCenter}, 100);
                 leftArm.animate(
                     {transform:"r160 " + leftArmCenter}, 
@@ -218,6 +255,7 @@
                 return;
             }
 
+            console.log("rain animation 1");
             rightArm.animate({transform: "r-160 " + rightArmCenter + " t0 4"}, 300);
             leftLeg.animate({transform: ""}, 300);
             rightLeg.animate({transform: "t0 -6"}, 300);
@@ -225,6 +263,7 @@
                 {transform: "r160 " + leftArmCenter + "t0 0"}, 
                 300,
                 function(){
+                    console.log("rain animation 2");
                     rightArm.animate({transform: "r-160 " + rightArmCenter + " t0 0"}, 300);
                     leftLeg.animate({transform:"t0 -6"}, 300);
                     rightLeg.animate({transform:""}, 300);
@@ -240,12 +279,14 @@
         var transition = function(dance) {
             stopDancing();
             setTimeout(function(){
+                doAnimation = true;
                 dance();
-            }, 250);
+            }, 650);
         }
 
         $("#rain").click(function(){
             isRaining = !isRaining;
+            console.log("isRaining", isRaining);
             if (isRaining) {
                 transition(rainDance);    
             } else {
@@ -253,17 +294,56 @@
             }
         });
 
+        var hideControls = function() {
+            $('.controls').each(function(){
+                $(this).hide();
+            })
+        }
+
+        var showControls = function() {
+            $('.controls').each(function(){
+                $(this).show();
+            })
+        }
 
         $("#info").click(function(){
+            showControls();
             $("#dude").show();
             $("#info").hide();
-        })
+        });
         $("#share").click(function(){
+            hideControls();
             $("#dude").hide();
             $("#info").show();
-        })
+        });
 
-        var stopDancing = function() {
+        $("#viral").click(function(){
+            hideControls();
+            $("#dude").hide();
+            $("#chart").show();
+            var tribeCount = 1;
+            client.run(count, function(err, res){
+                if (err) {
+                    console.log(err)
+                } else {
+                    console.log(res);
+                    tribeCount = res.result[0].result;
+                    $("#count").text(tribeCount);
+                }
+            });
+        });
+        $("#chart").click(function(){
+            showControls();
+            $("#dude").show();
+            $("#chart").hide();
+            $("#count").text("...");
+        });
+
+        $("#dancefloor").click(function() {
+            transition(makeSomeNoise);
+        });
+
+        stopDancing = function() {
             doAnimation = false;
         }
     });

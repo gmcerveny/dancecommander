@@ -21,6 +21,19 @@ body {
 #code {
     top: 50%;
 }
+#chart {
+    text-align:center;   
+    width:100%; 
+    height:100%; 
+    background-color:black;
+    display: none;
+}
+#count {
+    top: 30%;
+    position:relative;
+    font-size:112;
+    font-weight:bold;
+}
 .pink {
     background-color: #FF0AC2;
 }
