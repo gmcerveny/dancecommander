@@ -4,6 +4,7 @@
     <title>Dance Commander</title>
     <script src="https://use.fonticons.com/5b94a10f.js"></script>
     <link rel="stylesheet" type="text/css" href="style.css">
+    <link href='http://fonts.googleapis.com/css?family=Merriweather+Sans:400,800' rel='stylesheet' type='text/css'>
     
     <script src="/snap.svg.js"></script>
     <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
@@ -15,6 +16,10 @@
     <span id="share" class="topRight"><i class="icon icon-bullhorn icon-3x"></i></span>
     <span id="magic" class="bottomLeft"><i class="icon icon-magic icon-3x"></i></span>
     <span id="viral" class="bottomRight"><i class="icon icon-bar-chart icon-3x"></i></span>
+    <div id="info">
+        <div id="site" class="pinkText">DanceCommander.rocks</div>
+    </div>
+    </div>
     <div style="margin:0 auto; width:100%; height:100%">
 <svg id="dude" width="100%" height="100%" viewBox="0 0 130 131" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
     <g id="dudeGroup" transform="translate(50,25)">
@@ -247,6 +252,16 @@
                 transition(raiseRoof);
             }
         });
+
+
+        $("#info").click(function(){
+            $("#dude").show();
+            $("#info").hide();
+        })
+        $("#share").click(function(){
+            $("#dude").hide();
+            $("#info").show();
+        })
 
         var stopDancing = function() {
             doAnimation = false;
