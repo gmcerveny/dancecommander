@@ -15,7 +15,7 @@ body {
 #site {
     top: 40%;
     position:relative;
-    font-size:62;
+    font-size:32;
     font-weight:bold;
 }
 #code {
@@ -31,7 +31,7 @@ body {
 #count {
     top: 30%;
     position:relative;
-    font-size:112;
+    font-size:92;
     font-weight:bold;
 }
 .pink {
