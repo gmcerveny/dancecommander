@@ -1,0 +1,41 @@
+.pink {
+    background-color: #FF0AC2;
+}
+.green {
+    background-color: #47FF0A;
+}
+.red {
+    background-color: #FF0A47;
+}
+.yellow {
+    background-color: #C2FF0A;
+}
+.blue {
+    background-color: #0AC2FF;
+}
+i {
+    color: #AAAAAA;
+}
+.topLeft {
+    position: absolute;
+    top: 5;
+    left: 5;
+}
+
+.topRight {
+    position: absolute;
+    top: 5;
+    right: 5;
+}
+
+.bottomLeft {
+    position: absolute;
+    bottom: 5;
+    left: 5;
+}
+
+.bottomRight {
+    position: absolute;
+    bottom: 5;
+    right: 5;
+}
